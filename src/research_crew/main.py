@@ -17,6 +17,7 @@ warnings.filterwarnings("ignore", category=DeprecationWarning,
 # Replace with inputs you want to test with, it will automatically
 # interpolate any tasks and agents information
 
+
 def run():
     """
     Run the crew.
@@ -25,7 +26,7 @@ def run():
         'topic': 'Agricultural AI',
         'current_year': str(datetime.now().year)
     }
-    
+
     try:
         ResearchCrew().crew().kickoff(inputs=inputs)
     except Exception as e:
@@ -41,10 +42,15 @@ def train():
         'current_year': str(datetime.now().year)
     }
     try:
-        ResearchCrew().crew().train(n_iterations=int(sys.argv[1]), filename=sys.argv[2], inputs=inputs)
+        ResearchCrew().crew().train(
+            n_iterations=int(sys.argv[1]),
+            filename=sys.argv[2],
+            inputs=inputs
+            )
 
     except Exception as e:
         raise Exception(f"An error occurred while training the crew: {e}")
+
 
 def replay():
     """
@@ -56,6 +62,7 @@ def replay():
     except Exception as e:
         raise Exception(f"An error occurred while replaying the crew: {e}")
 
+
 def test():
     """
     Test the crew execution and returns the results.
@@ -64,9 +71,11 @@ def test():
         "topic": "AI LLMs",
         "current_year": str(datetime.now().year)
     }
-    
+
     try:
-        ResearchCrew().crew().test(n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs)
+        ResearchCrew().crew().test(
+            n_iterations=int(sys.argv[1]), eval_llm=sys.argv[2], inputs=inputs
+        )
 
     except Exception as e:
         raise Exception(f"An error occurred while testing the crew: {e}")
